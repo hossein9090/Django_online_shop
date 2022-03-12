@@ -1,0 +1,23 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="col-sm-3 col-md-3 col-lg-3 col-xs-4 pull-right">
+    <a href="{% url 'product-detail' product.id product.title %}">
+            <div class="product-image-wrapper">
+            <div class="single-products">
+                <div class="productinfo text-center">
+                    <img src="{{ product.image.url }}" alt="">
+                    <h2>{{ product.price }} تومان</h2>
+                    <p>{{ product.title }}</p>
+                    <a href="#" class="btn btn-default add-to-cart"><i
+                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+                </div>
+            </div>
+{#            <div class="choose">#}
+{#                <ul class="nav nav-pills nav-justified">#}
+{#                    <li><a href="{{ product.get_absolute_url }}"><i#}
+{#                            class="fa fa-plus-square"></i>مشاهده</a></li>#}
+{#                    <li><a href=""><i class="fa fa-plus-square"></i>مقایسه</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+        </div>
+    </a>
+</div>

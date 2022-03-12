@@ -1,0 +1,270 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load thumbnail %}
+{% load static %}
+<head>
+        <link rel="stylesheet" href="{% static "eshop_account/css/main.css" %}"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+</head>
+<body>
+{% block content %}
+
+    <section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+
+                            {% for slider in sliders %}
+                                <div class="item {{ forloop.first|yesno:"active," }}">
+                                    <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                                        <center>
+                                           <img src="{{ slider.image.url }}" alt="" style="border-radius:20px;max-width: 100%">
+                                        </center>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!--/slider-->
+
+    <!-- Start of showcase section پربازدید ترین ============================================= -->
+    <section id="showcase" class="showcase-section">
+        <div class="container">
+            <div class="row section-content">
+                <div class="showcase-content">
+                    <div class="section-title text-center pb50">
+{#                        <span class="title-text pink text-uppercase">عاشق دیدن</span>#}
+                        <h1 class="title deep-black pb40">پربازدید ترین محصولات</h1>
+                    </div>
+                    <!-- //section-title -->
+                    <div class="showcase-slider">
+                        {% for product in most_visit1 %}
+                            <div class="showcase-img">
+                                <a href="{% url 'product-detail' product.id product.title %}">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="{{ product.image.url }}"
+                                                     style="max-height: 300px;max-width: 100%;border-radius: 10px" alt="">
+                                                <h2>{{ product.title }}</h2>
+
+                                                <a class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>{{ product.price }}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div><!-- /showcase-content -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </section>
+    <!-- End of showcase section ============================================= -->
+
+        <!-- Start of showcase section  جدید ترین ============================================= -->
+    <section id="showcase" class="showcase-section">
+        <div class="container">
+            <div class="row section-content">
+                <div class="showcase-content">
+                    <div class="section-title text-center pb50">
+{#                        <span class="title-text pink text-uppercase">عاشق دیدن</span>#}
+                        <h1 class="title deep-black pb40">جدید ترین محصولات</h1>
+                    </div>
+                    <!-- //section-title -->
+                    <div class="showcase-slider">
+                        {% for product in latest_products1 %}
+                            <div class="showcase-img">
+                                <a href="{% url 'product-detail' product.id product.title %}">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="{{ product.image.url }}"
+                                                     style="max-height: 300px;max-width: 100%;border-radius: 10px" alt="">
+                                                <h2>{{ product.title }}</h2>
+
+                                                <a class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>{{ product.price }}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div><!-- /showcase-content -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </section>
+    <!-- End of showcase section ============================================= -->
+
+
+{#    <section>#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="recommended_items"><!--NewProduct_items-->#}
+{#                    <h2 class="title text-center"> جدید ترین محصولات</h2>#}
+{##}
+{#                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">#}
+{#                        <div class="carousel-inner">#}
+{#                            {% for group in most_visit %}#}
+{#                                <div class="item {{ forloop.first|yesno:"active," }}">#}
+{#                                    {% for product in group %}#}
+{#                                        <a href="{% url 'product-detail' product.id product.title %}">#}
+{#                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xs-6 ">#}
+{#                                                <div class="product-image-wrapper">#}
+{#                                                    <div class="single-products">#}
+{#                                                        <div class="productinfo text-center">#}
+{#                                                            <img src="{{ product.image.url }}"#}
+{#                                                                 style="max-height: 150px;max-width: 100%" alt="">#}
+{#                                                            <h2>{{ product.title }}</h2>#}
+{#                                                                <p>most popular</p>#}
+{#                                                            <a class="btn btn-default add-to-cart"><i#}
+{#                                                                    class="fa fa-shopping-cart"></i>{{ product.price }}#}
+{#                                                            </a>#}
+{#                                                        </div>#}
+{##}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </a>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">#}
+{#                            <i class="fa fa-angle-left"></i>#}
+{#                        </a>#}
+{#                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">#}
+{#                            <i class="fa fa-angle-right"></i>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div><!--/NewProduct_items-->#}
+{#                <div class="recommended_items"><!--NewProduct_items-->#}
+{#                    <h2 class="title text-center">جدیدترین محصولات</h2>#}
+{##}
+{#                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">#}
+{#                        <div class="carousel-inner">#}
+{#                            {% for group in latest_products %}#}
+{#                                <div class="item {{ forloop.first|yesno:"active," }}">#}
+{#                                    {% for product in group %}#}
+{#                                        <a href="{% url 'product-detail' product.id product.title %}">#}
+{#                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xs-6 ">#}
+{#                                                <div class="product-image-wrapper">#}
+{#                                                    <div class="single-products">#}
+{#                                                        <div class="productinfo text-center">#}
+{#                                                            <img src="{{ product.image.url }}" style="max-height: 150px"#}
+{#                                                                 alt="">#}
+{#                                                            <h2>{{ product.title }}</h2>#}
+{#                                                            <p>newest</p>#}
+{#                                                            <a class="btn btn-default add-to-cart"><i#}
+{#                                                                    class="fa fa-shopping-cart"></i>{{ product.price }}#}
+{#                                                            </a>#}
+{#                                                        </div>#}
+{##}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </a>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">#}
+{#                            <i class="fa fa-angle-left"></i>#}
+{#                        </a>#}
+{#                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">#}
+{#                            <i class="fa fa-angle-right"></i>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div><!--/NewProduct_items-->#}
+{##}
+{#                {% for element in allcat %}    {#  دسته بندی ها#}
+{#                    <div class="col-sm-12 padding-right">#}
+{#                        <div class="features_items"><!--RetailSale_items-->#}
+{#                            <a><h2 class="title text-center">{{ element }}</h2></a>#}
+{#                            <div id="new-item-carousel" class="carousel slide" data-ride="carousel">#}
+{#                                <div class="carousel-inner">#}
+{#                                    <div class="item active">#}
+{#                                        {% for product in element.pcat.all %}#}
+{#                                            <a href="{% url 'product-detail' product.id product.title %}">#}
+{#                                                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-6 ">#}
+{#                                                    <div class="product-image-wrapper">#}
+{#                                                        <div class="single-products">#}
+{#                                                            <div class="productinfo text-center">#}
+{#                                                                <img src="{{ product.image.url }}"#}
+{#                                                                     style="max-height: 150px;max-width: 100%"#}
+{#                                                                     alt=""/>#}
+{#                                                                <h2>{{ product.title }}</h2>#}
+{#                                                                    <p>{{ element.pack }}</p>#}
+{#                                                                <a href="#" class="btn btn-default add-to-cart"><i#}
+{#                                                                        class="fa fa-shopping-cart"></i>{{ product.price }}#}
+{#                                                                </a>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <div class="choose">#}
+{#                                                            <ul class="nav nav-pills nav-justified">#}
+{#                                                                <li>#}
+{#                                                                    <a href="#">#}
+{#                                                                        <i class="fa fa-plus-square"></i>لیست#}
+{#                                                                        علاقه#}
+{#                                                                        مندی#}
+{#                                                                        ها#}
+{#                                                                    </a>#}
+{#                                                                </li>#}
+{#                                                                <li><a href="#"><i#}
+{#                                                                        class="fa fa-plus-square"></i>مقایسه</a>#}
+{#                                                                </li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </a>#}
+{#                                        {% endfor %}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <a class="left recommended-item-control" href="#new-item-carousel"#}
+{#                                   data-slide="prev">#}
+{#                                    <i class="fa fa-angle-left"></i>#}
+{#                                </a>#}
+{#                                <a class="right recommended-item-control" href="#new-item-carousel"#}
+{#                                   data-slide="next">#}
+{#                                    <i class="fa fa-angle-right"></i>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div><!--RetailSale_items-->#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+
+{% endblock %}
+</body>
+

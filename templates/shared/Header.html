@@ -1,0 +1,129 @@
+{% load static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> 80 21 24 36 98+ </a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-lg-4 col-md-4 col-xs-4" style="text-align: left;">
+                    <div class="logo">
+                        <a href={% url 'about' %}><img src="{{ setting.logo_image.url }}" alt="Logo" style="text-align: center;border-radius: 25px;opacity: 0.9;max-width: 100px"/></a>
+                    </div>
+                </div>
+
+                <div class="col-sm-9 col-lg-8 col-md-8 col-xs-8 header-middle-menu">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            {% if request.user.is_authenticated %}
+                                <li><a href="/user"><i class="fa fa-user"></i> حساب کاربـری</a></li>
+                                <li><a href="{% url 'open-order' %}"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
+                            {% endif %}
+
+                            {% if not request.user.is_authenticated %}
+                                <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> ورود</a></li>
+                                <li><a href="/register"><i class="fa fa-lock"></i> ثبت نام</a></li>
+                            {% else %}
+                                <li><a href="/log-out"><i class="fa fa-lock"></i> خروج </a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                {% include 'shared/search_products_input_component.html' %}
+                <div style="z-index: 99999" class="col-sm-9 col-md-9 col-xs-9 col-lg-9 ">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-right">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="/">خـانه</a></li>
+                            <li><a href="/products">محصولات</a></li>
+                            <li><a class="visible-xs " data-toggle="collapse" data-target="#searchparam"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> کنسول بازی </a></li>
+                            <li class="hidden-xs dropdown" id="searchparam"><a>کنسول بازی<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for elm in console %}
+                                    <li><a href="/products/{{ elm.name }}">{{ elm }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a class="visible-xs" data-toggle="collapse" data-target="#searchparam1"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> لوازم جانبی </a></li>
+                            <li class="hidden-xs dropdown" id="searchparam1"><a href="#">لوازم جانبی<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for elm in accessories %}
+                                    <li><a href="/products/{{ elm.name }}">{{ elm }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a class="visible-xs" data-toggle="collapse" data-target="#searchparam2"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> عناوین بازی </a></li>
+                            <li class="hidden-xs dropdown" id="searchparam2"><a href="#">عناوین بازی<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for elm in disk %}
+                                    <li><a href="/products/{{ elm.name }}">{{ elm }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a class="visible-xs" data-toggle="collapse" data-target="#searchparam3"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> پی سی گیمینگ </a></li>
+                            <li class="hidden-xs dropdown" id="searchparam3"><a href="#">پی سی گیمینگ<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for elm in pc %}
+                                    <li><a href="/products/{{ elm.name }}">{{ elm }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a class="visible-xs" data-toggle="collapse" data-target="#searchparam4"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> دیگر کالاها </a></li>
+                            <li class="hidden-xs dropdown" id="searchparam4"><a href="#">دیگر کالاها<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    {% for elm in other %}
+                                    <li><a href="/products/{{ elm.name }}">{{ elm }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+{#                            <li><a href="/about-us">درباره مـا</a></li>#}
+{#                            <li><a href="/contact-us">تماس با مـا</a></li>#}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+</header><!--/header-->
+</body>
